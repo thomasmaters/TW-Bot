@@ -1,0 +1,42 @@
+<build building="statue">1</build>
+<recruit unit="knight"></recruit>
+<resources>20</resources>
+<build building="main">3</build>
+<build building="barracks">1</build>
+<resources>50</resources>
+<build building="main">5</build>
+<build building="smith">2</build>
+<research unit="axe"></research>
+<resources>60</resources>
+<build building="market">2</build>
+<build building="barracks">5</build>
+<build building="main">10</build>
+<build building="smith">5</build>
+<build building="stable">3</build>
+<research unit="light"></research>
+<research unit="spy"></research>
+<resources>120</resources>
+<build building="smith">10</build>
+<build building="garage">1</build>
+<research unit="ram"></research>
+<build building="garage">2</build>
+<build building="smith">12</build>
+<research unit="catapult"></research>
+<build building="main">23</build>
+<resources>161</resources>
+<build building="main">28</build>
+<build building="stable">10</build>
+<build building="barracks">10</build>
+<build building="stable">15</build>
+<build building="barracks">20</build>
+<build building="market">10</build>
+<build building="storage">24</build>
+<build building="farm">29</build>
+<build building="smith">20</build>
+<build building="snob">1</build>
+<build building="stable">20</build>
+<build building="barracks">25</build>
+<build building="wall">20</build>
+<build building="farm">30</build>
+<resources>500</resources>
+

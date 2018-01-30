@@ -1,0 +1,52 @@
+<recruit>
+	<spear>templates/recruit_spear.png</spear>
+	<sword>templates/recruit_sword.png</sword>
+	<axe>templates/recruit_axe.png</axe>
+	<spy>0</spy>
+	<light>0</light>
+	<heavy>0</heavy>
+	<ram>0</ram>
+	<catapult>0</catapult>
+	<knight>0</knight>
+	<snob>0</snob>
+</recruit>
+<research>
+	<axe>templates/research_axe.png</axe>
+	<spy>templates/research_spy.png</spy>
+	<light>templates/research_light.png</light>
+	<heavy>templates/research_heavy.png</heavy>
+	<ram>templates/research_ram.png</ram>
+	<catapult>templates/research_catapult.png</catapult>
+</research>
+<buildings>
+	<main>
+		<overview minLevel="1" maxLevel="4">templates/main_0.png</overview>
+		<overview minLevel="5" maxLevel="14">templates/main_1.png</overview>
+		<overview minLevel="15" maxLevel="30">templates/main_2.png</overview>
+	</main>
+	<barracks>
+		<overview minLevel="1" maxLevel="4">templates/barracks_0.png</overview>
+		<overview minLevel="5" maxLevel="14">templates/barracks_1.png</overview>
+		<overview minLevel="15" maxLevel="30">templates/barracks_2.png</overview>
+	</barracks>
+	<stable>0</stable>
+	<garage>0</garage>
+	<snob>0</snob>
+	<smith>
+		<overview minLevel="0" maxLevel="4">templates/smith_0.png</overview>
+		<overview minLevel="5" maxLevel="9">templates/smith_1.png</overview>
+		<overview minLevel="10" maxLevel="20">templates/smith_2.png</overview>
+	</smith>
+	<statue>0</statue>
+	<market>0</market>
+</buildings>
+<nav>
+	<map>templates/map.png</map>
+	<farm_assistant>templates/farmassistant.png</farm_assistant>
+	<overview>templates/overview.png</overview>
+</nav>
+<farm_assistant>
+	<A>templates/a.png</A>
+	<B>templates/b.png</B>
+	<C>templates/c.png</C>
+</farm_assistant>
