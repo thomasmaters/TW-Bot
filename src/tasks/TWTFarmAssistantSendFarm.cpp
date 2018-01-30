@@ -19,12 +19,12 @@ TWT_FarmAssistantSendFarm::TWT_FarmAssistantSendFarm(const TW_ENUMS::FarmAssista
 {
 }
 
-void TWT_FarmAssistantSendFarm::preBotTask() const
+bool TWT_FarmAssistantSendFarm::preBotTask() const
 {
-    BotManager::getInstance().addTask(std::shared_ptr<TW_Task>(new TWT_GotoNavigation(TW_ENUMS::NavigationNames::FARM_ASSISTANT)));
+    return BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoNavigation(TW_ENUMS::NavigationNames::FARM_ASSISTANT)));
 }
 
-void TWT_FarmAssistantSendFarm::executeBotTask() const
+bool TWT_FarmAssistantSendFarm::executeBotTask() const
 {
     try
     {
@@ -40,12 +40,14 @@ void TWT_FarmAssistantSendFarm::executeBotTask() const
     catch (const std::exception& e)
     {
         std::cerr << __PRETTY_FUNCTION__ << e.what() << std::endl;
+        return false;
     }
+    return true;
 }
 
-void TWT_FarmAssistantSendFarm::postBotTask() const
+bool TWT_FarmAssistantSendFarm::postBotTask() const
 {
-    BotManager::getInstance().addTask(std::shared_ptr<TW_Task>(new TWT_GotoNavigation(TW_ENUMS::NavigationNames::OVERVIEW)));
+    return BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoNavigation(TW_ENUMS::NavigationNames::OVERVIEW)));
 }
 
 TWT_FarmAssistantSendFarm::~TWT_FarmAssistantSendFarm()

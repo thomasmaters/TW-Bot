@@ -15,8 +15,9 @@ class TWT_FarmAssistantSetTemplate : public TW_Task
 public:
     TWT_FarmAssistantSetTemplate();
 
-    void executeBotTask() const
+    bool executeBotTask() const
     {
+	return true;
     }
 
     virtual ~TWT_FarmAssistantSetTemplate();

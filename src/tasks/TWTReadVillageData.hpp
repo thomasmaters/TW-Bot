@@ -15,7 +15,7 @@ class TWT_ReadVillageData : public TW_Task
 public:
     TWT_ReadVillageData();
 
-    void executeBotTask() const;
+    bool executeBotTask() const;
 
     virtual ~TWT_ReadVillageData();
 };

@@ -24,6 +24,11 @@ void BotManager::startBotManager()
 void BotManager::addEvent(const std::shared_ptr<TW_Event>& aEvent)
 {
     std::cerr << "Event added: " << typeid(*aEvent).name() << std::endl;
+    if(typeid(*aEvent) == typeid(TWE_TaskFailed))
+    {
+	handleEvent(aEvent);
+	return;
+    }
     eventQueue.addToQueue(aEvent);
 }
 
@@ -77,6 +82,11 @@ void BotManager::handleEvent(const std::shared_ptr<TW_Event>& aEvent) const
         TWE_UnitRecruitmentFinished& a = dynamic_cast<TWE_UnitRecruitmentFinished&>(*aEvent);
         TWE_UnitRecruitmentFinishedHandler(a);
     }
+    if (typeid(*aEvent) == typeid(TWE_TaskFailed))
+    {
+	TWE_TaskFailed& a = dynamic_cast<TWE_TaskFailed&>(*aEvent);
+	TWE_TaskFailedHandler(a);
+    }
 }
 
 void BotManager::addTask(const std::shared_ptr<TW_Task>& aTask)
@@ -91,18 +101,22 @@ void BotManager::scheduleTask(const uint32_t aDelay, const std::shared_ptr<TW_Ta
     taskQueue.scheduleEvent(aDelay, aTask);
 }
 
-void BotManager::handleTask(const std::shared_ptr<TW_Task>& aTask) const
+bool BotManager::handleTask(const std::shared_ptr<TW_Task>& aTask) const
 {
     std::cerr << "Handling task: " << typeid(*aTask).name() << std::endl;
-    aTask->preBotTask();
-    aTask->executeBotTask();
-    aTask->postBotTask();
+    if(!aTask->preBotTask())
+	return false;
+    if(!aTask->executeBotTask())
+	return false;
+    if(!aTask->postBotTask())
+	return false;
     std::this_thread::sleep_for(std::chrono::milliseconds(150));
+    return true;
 }
 
-void BotManager::executeSubTask(const std::shared_ptr<TW_Task>& aEvent) const
+bool BotManager::executeSubTask(const std::shared_ptr<TW_Task>& aEvent) const
 {
-    handleTask(aEvent);
+    return handleTask(aEvent);
 }
 
 BotManager::~BotManager()

@@ -17,6 +17,7 @@
 #include "events/TWEUnitResearchFinished.hpp"
 #include "events/TWEUnitResearchStarted.hpp"
 #include "events/TWEVillageDataParsed.hpp"
+#include "events/TWETaskFailed.hpp"
 #include "events/TWEvent.hpp"
 
 #include <algorithm>
@@ -43,6 +44,7 @@ public:
     boost::signals2::signal<void(const TWE_UnitResearchFinished)> TWE_UnitResearchFinishedHandler;
     boost::signals2::signal<void(const TWE_UnitRecruitmentStarted)> TWE_UnitRecruitmentStartedHandler;
     boost::signals2::signal<void(const TWE_UnitRecruitmentFinished)> TWE_UnitRecruitmentFinishedHandler;
+    boost::signals2::signal<void(const TWE_TaskFailed)> TWE_TaskFailedHandler;
 
 
     // public:

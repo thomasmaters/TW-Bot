@@ -15,13 +15,13 @@ TWT_ReadTroopData::TWT_ReadTroopData()
     std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
-void TWT_ReadTroopData::preBotTask() const
+bool TWT_ReadTroopData::preBotTask() const
 {
-    BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoBuilding(TW_ENUMS::BuildingNames::SMITH)));
+    return BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoBuilding(TW_ENUMS::BuildingNames::SMITH)));
 }
 
 // Before executing this task go to the smith.
-void TWT_ReadTroopData::executeBotTask() const
+bool TWT_ReadTroopData::executeBotTask() const
 {
     Keyboard::pressKey(VK_F12);
     Mouse::moveMouse((POINT){ 1800, 150 });
@@ -62,16 +62,18 @@ void TWT_ReadTroopData::executeBotTask() const
     }
     catch (std::exception& e)
     {
+        BotManager::getInstance().addEvent(std::shared_ptr<TW_Event>(new TWE_TaskFailed(shared_from_this(), e)));
         std::cout << __PRETTY_FUNCTION__ << e.what() << std::endl;
-        return;
+        return false;
     }
 
     BotManager::getInstance().addEvent(std::shared_ptr<TW_Event>(new TWE_TroopDataParsed(troopData)));
+    return true;
 }
 
-void TWT_ReadTroopData::postBotTask() const
+bool TWT_ReadTroopData::postBotTask() const
 {
-    BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoNavigation(TW_ENUMS::NavigationNames::OVERVIEW)));
+    return BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoNavigation(TW_ENUMS::NavigationNames::OVERVIEW)));
 }
 
 TWT_ReadTroopData::~TWT_ReadTroopData()

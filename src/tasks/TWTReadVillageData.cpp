@@ -13,7 +13,7 @@ TWT_ReadVillageData::TWT_ReadVillageData()
     std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
-void TWT_ReadVillageData::executeBotTask() const
+bool TWT_ReadVillageData::executeBotTask() const
 {
     Keyboard::pressKey(VK_F12);
     Mouse::moveMouse((POINT){ 1800, 150 });
@@ -55,11 +55,13 @@ void TWT_ReadVillageData::executeBotTask() const
     }
     catch (const std::exception& e)
     {
+        BotManager::getInstance().addEvent(std::shared_ptr<TW_Event>(new TWE_TaskFailed(shared_from_this(), e)));
         std::cerr << __PRETTY_FUNCTION__ << e.what() << std::endl;
-        return;
+        return false;
     }
 
     BotManager::getInstance().addEvent(std::shared_ptr<TW_Event>(new TWE_VillageDataParsed(villageData)));
+    return true;
 }
 
 TWT_ReadVillageData::~TWT_ReadVillageData()

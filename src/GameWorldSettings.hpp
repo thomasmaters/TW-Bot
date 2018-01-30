@@ -13,6 +13,7 @@
 
 #include <cstdint>
 #include <map>
+#include "Resources.hpp"
 
 class GameWorldSettings
 {

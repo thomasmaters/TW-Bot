@@ -17,7 +17,7 @@ class TWT_GotoBuilding : public TW_Task
 public:
     explicit TWT_GotoBuilding(const enum TW_ENUMS::BuildingNames& gotoLocation);
 
-    void executeBotTask() const;
+    bool executeBotTask() const;
 
     virtual ~TWT_GotoBuilding();
 

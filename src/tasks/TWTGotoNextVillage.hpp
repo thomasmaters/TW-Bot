@@ -8,7 +8,7 @@ class TWT_GotoNextVillage : public TW_Task
 public:
     TWT_GotoNextVillage();
 
-    void executeBotTask() const;
+    bool executeBotTask() const;
 
     virtual ~TWT_GotoNextVillage();
 

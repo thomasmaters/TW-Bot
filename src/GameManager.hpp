@@ -14,6 +14,7 @@
 #include "Village.hpp"
 #include "VillageBuilder.hpp"
 #include "util/Singleton.hpp"
+#include "Resources.hpp"
 
 #include <opencv2/core/types.hpp>
 #include "../lib/tinyxml2.h"

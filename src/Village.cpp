@@ -26,6 +26,7 @@ Village::Village() : currentlyBuilding(false), currentlyResearching(false), vill
     BotManager::getInstance().TWE_UnitResearchFinishedHandler.connect(boost::bind(&Village::OnUnitResearchFinished, this, _1));
     BotManager::getInstance().TWE_UnitRecruitmentStartedHandler.connect(boost::bind(&Village::OnUnitRecruitmentStarted, this, _1));
     BotManager::getInstance().TWE_UnitRecruitmentFinishedHandler.connect(boost::bind(&Village::OnUnitRecruitmentFinished, this, _1));
+    BotManager::getInstance().TWE_TaskFailedHandler.connect(boost::bind(&Village::OnTaskFailed, this, _1));
     // Schedule task to get the villageData.
     BotManager::getInstance().addTask(std::shared_ptr<TW_Task>(new TWT_ReadVillageData()));
 }
@@ -123,6 +124,16 @@ void Village::OnUnitRecruitmentStarted(const TWE_UnitRecruitmentStarted& event)
 
 void Village::OnUnitRecruitmentFinished(const TWE_UnitRecruitmentFinished& event)
 {
+}
+
+void Village::OnTaskFailed(const TWE_TaskFailed& event)
+{
+    if (typeid(*event.task) == typeid(TWT_ReadVillageData))
+    {
+        std::cout << "Read village data failed. Trying again." << std::endl;
+        BotManager::getInstance().addTask(std::shared_ptr<TW_Task>(new TWT_ReadVillageData()));
+    }
+    std::cout << event.reason.what() << std::endl;
 }
 
 /***********************************************

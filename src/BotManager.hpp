@@ -13,6 +13,7 @@
 #include "events/TWEBuildingUpgradeFinished.hpp"
 #include "events/TWEBuildingUpgradeStarted.hpp"
 #include "events/TWESwitchedToVillage.hpp"
+#include "events/TWETaskFailed.hpp"
 #include "events/TWETroopDataParsed.hpp"
 #include "events/TWEUnitRecruitmentFinished.hpp"
 #include "events/TWEUnitRecruitmentStarted.hpp"
@@ -38,13 +39,13 @@ public:
     void addTask(const std::shared_ptr<TW_Task>& aTask);
     void scheduleTask(const uint32_t aDelay, const std::shared_ptr<TW_Task>& aTask);
 
-    void executeSubTask(const std::shared_ptr<TW_Task>& aEvent) const;
+    bool executeSubTask(const std::shared_ptr<TW_Task>& aEvent) const;
 
     virtual ~BotManager();
 
 protected:
     void handleEvent(const std::shared_ptr<TW_Event>& aEvent) const;
-    void handleTask(const std::shared_ptr<TW_Task>& aTask) const;
+    bool handleTask(const std::shared_ptr<TW_Task>& aTask) const;
 
 private:
     BotManager()

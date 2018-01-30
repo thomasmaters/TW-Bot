@@ -3,17 +3,20 @@
 
 #include "../TW_Enums.hpp"
 
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
+
 class TW_Event
 {
 public:
-    explicit TW_Event(const enum TW_ENUMS::EventPiority aPiority = TW_ENUMS::EventPiority::LOW)
-      : piority(aPiority){
+    explicit TW_Event()
+      : tag(boost::uuids::random_generator()()){
 
       };
 
     TW_Event(const TW_Event& aEventBase)
     {
-        this->piority = aEventBase.piority;
+        this->tag = aEventBase.tag;
     }
 
     /*
@@ -21,28 +24,16 @@ public:
      */
     bool operator==(const TW_Event& lhs) const
     {
-        return lhs.piority == piority;
+        return lhs.tag == tag;
     }
 
     TW_Event& operator=(const TW_Event& aEventBase)
     {
         if (this != &aEventBase)
         {
-            this->piority = aEventBase.piority;
+            this->tag = aEventBase.tag;
         }
         return *this;
-    }
-
-    bool operator>(const TW_Event& lhs) const
-    {
-        return piority > lhs.piority;
-    }
-    /*
-     * Functions.
-     */
-    const enum TW_ENUMS::EventPiority& getEventPiority() const
-    {
-        return piority;
     }
 
     virtual ~TW_Event()
@@ -50,7 +41,7 @@ public:
     }
 
 private:
-    enum TW_ENUMS::EventPiority piority;
+    boost::uuids::uuid tag;
 };
 
 

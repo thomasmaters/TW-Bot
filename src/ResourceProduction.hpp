@@ -12,32 +12,7 @@
 #include <algorithm>
 #include <ctime>
 
-struct Resources
-{
-    Resources(double wood = 0, double stone = 0, double iron = 0) : wood(wood), stone(stone), iron(iron)
-    {
-    }
-
-    double wood;
-    double stone;
-    double iron;
-
-    std::string toString()
-    {
-        return "Wood: " + std::to_string(wood) + "   Stone: " + std::to_string(stone) + "   Iron: " + std::to_string(iron);
-    }
-
-    Resources& operator-=(const Resources& rhs)
-    {
-        wood -= rhs.wood;
-        stone -= rhs.stone;
-        iron -= rhs.iron;
-        return *this;
-    }
-};
-
-typedef Resources ResourceBonus;
-typedef Resources ResourceProd;
+#include "Resources.hpp"
 
 class ResourceProduction
 {

@@ -7,7 +7,7 @@ TWT_GotoNavigation::TWT_GotoNavigation(const enum TW_ENUMS::NavigationNames& got
 {
 }
 
-void TWT_GotoNavigation::executeBotTask() const
+bool TWT_GotoNavigation::executeBotTask() const
 {
     try
     {
@@ -19,7 +19,9 @@ void TWT_GotoNavigation::executeBotTask() const
     catch (std::exception& e)
     {
         std::cerr << __PRETTY_FUNCTION__ << e.what() << std::endl;
+        return false;
     }
+    return true;
 }
 
 TWT_GotoNavigation::~TWT_GotoNavigation()

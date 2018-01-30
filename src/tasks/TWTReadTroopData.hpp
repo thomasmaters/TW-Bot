@@ -15,11 +15,11 @@ class TWT_ReadTroopData : public TW_Task
 public:
     TWT_ReadTroopData();
 
-    void preBotTask() const;
+    bool preBotTask() const;
 
-    void executeBotTask() const;
+    bool executeBotTask() const;
 
-    void postBotTask() const;
+    bool postBotTask() const;
 
     virtual ~TWT_ReadTroopData();
 };

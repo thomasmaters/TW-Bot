@@ -11,12 +11,12 @@ TWT_ResearchUnit::TWT_ResearchUnit(const TW_ENUMS::TroopNames aUnit, const std::
 {
 }
 
-void TWT_ResearchUnit::preBotTask() const
+bool TWT_ResearchUnit::preBotTask() const
 {
-    BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoBuilding(TW_ENUMS::BuildingNames::SMITH)));
+    return BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoBuilding(TW_ENUMS::BuildingNames::SMITH)));
 }
 
-void TWT_ResearchUnit::executeBotTask() const
+bool TWT_ResearchUnit::executeBotTask() const
 {
     try
     {
@@ -35,14 +35,19 @@ void TWT_ResearchUnit::executeBotTask() const
     catch (const std::exception& e)
     {
         std::cerr << __PRETTY_FUNCTION__ << e.what() << std::endl;
+        return false;
     }
+    return true;
 }
 
-void TWT_ResearchUnit::postBotTask() const
+bool TWT_ResearchUnit::postBotTask() const
 {
-    BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoNavigation(TW_ENUMS::NavigationNames::OVERVIEW)));
-
-    BotManager::getInstance().addEvent(std::shared_ptr<TW_Event>(new TWE_UnitResearchStarted(unit, village->getVillageId())));
+    if(BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoNavigation(TW_ENUMS::NavigationNames::OVERVIEW))))
+    {
+	BotManager::getInstance().addEvent(std::shared_ptr<TW_Event>(new TWE_UnitResearchStarted(unit, village->getVillageId())));
+	return true;
+    }
+    return false;
 }
 
 TWT_ResearchUnit::~TWT_ResearchUnit()

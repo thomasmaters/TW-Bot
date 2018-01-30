@@ -12,19 +12,20 @@ TWT_RecruitUnit::TWT_RecruitUnit(const std::shared_ptr<Village>& aVillage, const
 {
 }
 
-void TWT_RecruitUnit::preBotTask() const
+bool TWT_RecruitUnit::preBotTask() const
 {
     if (unit == TW_ENUMS::TroopNames::AXE || unit == TW_ENUMS::TroopNames::SPEAR || unit == TW_ENUMS::TroopNames::SWORD)
     {
-        BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoBuilding(TW_ENUMS::BuildingNames::BARRACKS)));
+        return BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoBuilding(TW_ENUMS::BuildingNames::BARRACKS)));
     }
     else
     {
-        BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoBuilding(TW_ENUMS::BuildingNames::STABLE)));
+        return BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoBuilding(TW_ENUMS::BuildingNames::STABLE)));
     }
+    return false;
 }
 
-void TWT_RecruitUnit::executeBotTask() const
+bool TWT_RecruitUnit::executeBotTask() const
 {
     try
     {
@@ -63,12 +64,14 @@ void TWT_RecruitUnit::executeBotTask() const
     catch (const std::exception& e)
     {
         std::cerr << __PRETTY_FUNCTION__ << e.what() << std::endl;
+        return false;
     }
+    return true;
 }
 
-void TWT_RecruitUnit::postBotTask() const
+bool TWT_RecruitUnit::postBotTask() const
 {
-    BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoNavigation(TW_ENUMS::NavigationNames::OVERVIEW)));
+    return BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoNavigation(TW_ENUMS::NavigationNames::OVERVIEW)));
 }
 
 TWT_RecruitUnit::~TWT_RecruitUnit()

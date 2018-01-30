@@ -18,11 +18,11 @@ class TWT_UpgradeBuilding : public TW_Task
 public:
     TWT_UpgradeBuilding(const std::shared_ptr<Village>& village, const TW_ENUMS::BuildingNames& building, const std::string& csrf);
 
-    void preBotTask() const;
+    bool preBotTask() const;
 
-    void executeBotTask() const;
+    bool executeBotTask() const;
 
-    void postBotTask() const;
+    bool postBotTask() const;
 
     virtual ~TWT_UpgradeBuilding();
 

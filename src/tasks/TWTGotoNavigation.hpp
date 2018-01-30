@@ -17,7 +17,7 @@ class TWT_GotoNavigation : public TW_Task
 public:
     explicit TWT_GotoNavigation(const enum TW_ENUMS::NavigationNames& gotoLocation);
 
-    void executeBotTask() const;
+    bool executeBotTask() const;
 
     virtual ~TWT_GotoNavigation();
 

@@ -17,11 +17,11 @@ class TWT_FarmAssistantSendFarm : public TW_Task
 public:
     TWT_FarmAssistantSendFarm(const TW_ENUMS::FarmAssistantTemplates& aFarmTemplate, uint8_t aAmountOfFarmsToSend);
 
-    void preBotTask() const;
+    bool preBotTask() const;
 
-    void executeBotTask() const;
+    bool executeBotTask() const;
 
-    void postBotTask() const;
+    bool postBotTask() const;
 
     virtual ~TWT_FarmAssistantSendFarm();
 

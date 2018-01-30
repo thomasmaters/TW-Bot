@@ -31,6 +31,7 @@ class TWE_UnitResearchStarted;
 class TWE_UnitResearchFinished;
 class TWE_UnitRecruitmentStarted;
 class TWE_UnitRecruitmentFinished;
+class TWE_TaskFailed;
 
 struct UnitResearch
 {
@@ -55,6 +56,7 @@ public:
     void OnUnitResearchFinished(const TWE_UnitResearchFinished& event);
     void OnUnitRecruitmentStarted(const TWE_UnitRecruitmentStarted& event);
     void OnUnitRecruitmentFinished(const TWE_UnitRecruitmentFinished& event);
+    void OnTaskFailed(const TWE_TaskFailed& event);
 
     /**
      * Checks if the unit can currently be researched.

@@ -12,12 +12,12 @@ TWT_UpgradeBuilding::TWT_UpgradeBuilding(const std::shared_ptr<Village>& village
 {
 }
 
-void TWT_UpgradeBuilding::preBotTask() const
+bool TWT_UpgradeBuilding::preBotTask() const
 {
-    BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoBuilding(TW_ENUMS::BuildingNames::MAIN)));
+    return BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoBuilding(TW_ENUMS::BuildingNames::MAIN)));
 }
 
-void TWT_UpgradeBuilding::executeBotTask() const
+bool TWT_UpgradeBuilding::executeBotTask() const
 {
     try
     {
@@ -49,12 +49,14 @@ void TWT_UpgradeBuilding::executeBotTask() const
     catch (const std::exception& e)
     {
         std::cerr << __PRETTY_FUNCTION__ << e.what() << std::endl;
+        return false;
     }
+    return true;
 }
 
-void TWT_UpgradeBuilding::postBotTask() const
+bool TWT_UpgradeBuilding::postBotTask() const
 {
-    BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoNavigation(TW_ENUMS::NavigationNames::OVERVIEW)));
+    return BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoNavigation(TW_ENUMS::NavigationNames::OVERVIEW)));
 }
 
 TWT_UpgradeBuilding::~TWT_UpgradeBuilding()

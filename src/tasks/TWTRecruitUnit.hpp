@@ -16,11 +16,11 @@ class TWT_RecruitUnit : public TW_Task
 public:
     TWT_RecruitUnit(const std::shared_ptr<Village>& aVillage, const TW_ENUMS::TroopNames& aUnit, uint32_t aAmountOfUnits);
 
-    void preBotTask() const;
+    bool preBotTask() const;
 
-    void executeBotTask() const;
+    bool executeBotTask() const;
 
-    void postBotTask() const;
+    bool postBotTask() const;
 
     virtual ~TWT_RecruitUnit();
 
