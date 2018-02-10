@@ -16,7 +16,7 @@
 
 #include <iostream>
 
-Village::Village() : currentlyBuilding(false), currentlyResearching(false), villageID(0), csrf()
+Village::Village() : currentlyBuilding(false), currentlyResearching(false), villageID(0), csrf(), world()
 {
     BotManager::getInstance().TWE_VillageDataParsedHandler.connect(boost::bind(&Village::OnVillageDataParsedEvent, this, _1));
     BotManager::getInstance().TWE_TroopDataParsedHandler.connect(boost::bind(&Village::OnTroopDataParsedEvent, this, _1));
@@ -128,12 +128,11 @@ void Village::OnUnitRecruitmentFinished(const TWE_UnitRecruitmentFinished& event
 
 void Village::OnTaskFailed(const TWE_TaskFailed& event)
 {
-    if (typeid(*event.task) == typeid(TWT_ReadVillageData))
+    if (typeid(*event.task) == typeid(TWT_ReadVillageData) && villageID == 0)
     {
         std::cout << "Read village data failed. Trying again." << std::endl;
-        BotManager::getInstance().addTask(std::shared_ptr<TW_Task>(new TWT_ReadVillageData()));
+        BotManager::getInstance().scheduleTask(5000, std::shared_ptr<TW_Task>(new TWT_ReadVillageData()));
     }
-    std::cout << event.reason.what() << std::endl;
 }
 
 /***********************************************
@@ -227,6 +226,7 @@ void Village::parseVillageClipboardData(nlohmann::json villageData)
         // Get village identifier.
         villageID = villageData["village"]["id"];
         csrf      = villageData["csrf"];
+        world     = villageData["world"];
 
         // Get resource information.
         population    = villageData["village"]["pop"];
@@ -234,9 +234,18 @@ void Village::parseVillageClipboardData(nlohmann::json villageData)
         maxStorage    = villageData["village"]["storage_max"];
         resources     = Resources(villageData["village"]["wood_float"], villageData["village"]["stone_float"], villageData["village"]["iron_float"]);
         production    = ResourceProd(villageData["village"]["wood_prod"], villageData["village"]["stone_prod"], villageData["village"]["iron_prod"]);
-        bonus =
-          ResourceBonus(villageData["village"]["bonus"]["wood"], villageData["village"]["bonus"]["stone"], villageData["village"]["bonus"]["iron"]);
         last_res_tick = std::time_t(villageData["village"]["last_res_tick"]);
+
+        // Does or village has a resource bonus?
+        if (villageData["village"].find("bonus") != villageData["village"].end() && !villageData["village"]["bonus"].empty())
+        {
+            bonus = ResourceBonus(villageData["village"]["bonus"]["wood"], villageData["village"]["bonus"]["stone"],
+                                  villageData["village"]["bonus"]["iron"]);
+        }
+        else
+        {
+            bonus = ResourceBonus(0, 0, 0);
+        }
     }
 }
 

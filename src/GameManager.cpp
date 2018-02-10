@@ -83,12 +83,19 @@ GameManager::GameManager()
     BotManager::getInstance().TWE_BuildingUpgradeStartedHandler.connect(boost::bind(&GameManager::OnUpgradeStartedEvent, this, _1));
     BotManager::getInstance().TWE_BuildingUpgradeFinishedHandler.connect(boost::bind(&GameManager::OnUpgradeFinishedEvent, this, _1));
 
-    // Load some default tribalwars data.
-    buildingData.LoadFile("interface.xml");
-    troopData.LoadFile("troops.xml");
+    try
+    {
+        // Load some default tribalwars data.
+        buildingData.LoadFile("interface.xml");
+        troopData.LoadFile("troops.xml");
 
-    // Load some other data.
-    templateData.LoadFile("templates.xml");
+        // Load some other data.
+        templateData.LoadFile("templates.xml");
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << __PRETTY_FUNCTION__ << ": " << e.what() << std::endl;
+    }
 }
 
 // https://forum.tribalwars.us/index.php?threads/guide-building-formulas.389/
@@ -130,17 +137,26 @@ uint32_t GameManager::getPopulationCost(const TW_ENUMS::BuildingNames& building,
 
 Resources GameManager::getBuildingCost(const TW_ENUMS::BuildingNames& building, const uint8_t level)
 {
-    const tinyxml2::XMLElement* buildingXMLElement = buildingData.FirstChild()->FirstChildElement(TW_ENUMS::enumToBuildingName(building).c_str());
+    try
+    {
+        const tinyxml2::XMLElement* buildingXMLElement = buildingData.FirstChild()->FirstChildElement(TW_ENUMS::enumToBuildingName(building).c_str());
 
-    double baseWood    = std::atof(buildingXMLElement->FirstChildElement("wood")->GetText());
-    double baseStone   = std::atof(buildingXMLElement->FirstChildElement("stone")->GetText());
-    double baseIron    = std::atof(buildingXMLElement->FirstChildElement("iron")->GetText());
-    double woodFactor  = std::atof(buildingXMLElement->FirstChildElement("wood_factor")->GetText());
-    double stoneFactor = std::atof(buildingXMLElement->FirstChildElement("stone_factor")->GetText());
-    double ironFactor  = std::atof(buildingXMLElement->FirstChildElement("iron_factor")->GetText());
+        double baseWood    = std::atof(buildingXMLElement->FirstChildElement("wood")->GetText());
+        double baseStone   = std::atof(buildingXMLElement->FirstChildElement("stone")->GetText());
+        double baseIron    = std::atof(buildingXMLElement->FirstChildElement("iron")->GetText());
+        double woodFactor  = std::atof(buildingXMLElement->FirstChildElement("wood_factor")->GetText());
+        double stoneFactor = std::atof(buildingXMLElement->FirstChildElement("stone_factor")->GetText());
+        double ironFactor  = std::atof(buildingXMLElement->FirstChildElement("iron_factor")->GetText());
 
-    return Resources(baseWood * std::pow(woodFactor, level - 1), baseStone * std::pow(stoneFactor, level - 1),
-                     baseIron * std::pow(ironFactor, level - 1));
+        return Resources(baseWood * std::pow(woodFactor, level - 1), baseStone * std::pow(stoneFactor, level - 1),
+                         baseIron * std::pow(ironFactor, level - 1));
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << __PRETTY_FUNCTION__ << ": " << e.what() << std::endl;
+    }
+
+    return Resources(0, 0, 0);
 }
 
 double GameManager::getResourceProduction(uint8_t buildingLevel) const
@@ -164,6 +180,7 @@ uint16_t GameManager::getMaxPopulation(uint8_t farmLevel) const
 
 void GameManager::createNewVillage()
 {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
     // Start by processing the village into memory.
     villages.push_back(std::shared_ptr<Village>(new Village()));
 

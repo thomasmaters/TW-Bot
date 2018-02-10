@@ -39,7 +39,7 @@ bool TWT_FarmAssistantSendFarm::executeBotTask() const
     }
     catch (const std::exception& e)
     {
-        std::cerr << __PRETTY_FUNCTION__ << e.what() << std::endl;
+        BotManager::getInstance().addEvent(std::shared_ptr<TW_Event>(new TWE_TaskFailed(shared_from_this(), e)));
         return false;
     }
     return true;

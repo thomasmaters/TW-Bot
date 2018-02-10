@@ -14,16 +14,23 @@
 
 VillageBuilder::VillageBuilder()
 {
-    villageUpgradePath.LoadFile("village_build.xml");
+    try
+    {
+        villageUpgradePath.LoadFile("village_build.xml");
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << __PRETTY_FUNCTION__ << ": " << e.what() << std::endl;
+    }
 }
 
 void VillageBuilder::developVillage(const std::shared_ptr<Village>& currentVillage)
 {
-    std::cout << __PRETTY_FUNCTION__ << std::endl;
     try
     {
         for (tinyxml2::XMLElement* child = villageUpgradePath.FirstChildElement(); child != NULL; child = child->NextSiblingElement())
         {
+            std::cout << std::string(child->Name()) << std::endl;
             if (std::string(child->Name()) == "build" && !currentVillage->isCurrentlyBuilding())
             {
                 uint8_t level                    = std::stoi(child->GetText());
@@ -52,6 +59,7 @@ void VillageBuilder::developVillage(const std::shared_ptr<Village>& currentVilla
 
                 if (canUpgradeResourceBuilding(currentVillage, maxEfficienty))
                 {
+                    std::cout << "Can upgrade" << std::endl;
                     TW_ENUMS::BuildingNames bestResourceToUpgrade = upgradeNextResource(currentVillage, maxEfficienty);
                     startVillageBuild(currentVillage, bestResourceToUpgrade);
                     break;
@@ -128,7 +136,7 @@ TW_ENUMS::BuildingNames VillageBuilder::upgradeNextResource(const std::shared_pt
 bool VillageBuilder::canUpgradeResourceBuilding(const std::shared_ptr<Village>& currentVillage, uint16_t maxEfficienty)
 {
     Resources efficiency = getResourcesEfficiency(currentVillage);
-    return efficiency.wood < maxEfficienty && efficiency.stone < maxEfficienty && efficiency.iron < maxEfficienty;
+    return efficiency < maxEfficienty;
 }
 
 double VillageBuilder::getUpgradeEfficiency(const std::shared_ptr<Village>& currentVillage, const TW_ENUMS::BuildingNames& building,
@@ -139,11 +147,9 @@ double VillageBuilder::getUpgradeEfficiency(const std::shared_ptr<Village>& curr
     {
         return 9999;
     }
-
     Resources cost = GameManager::getInstance().getBuildingCost(building, upgradeToLevel);
     uint32_t productionIncrease =
       GameManager::getInstance().getResourceProduction(upgradeToLevel) - GameManager::getInstance().getResourceProduction(upgradeToLevel - 1);
-
     return (cost.wood + cost.iron + cost.stone) / productionIncrease;
 }
 
@@ -153,6 +159,7 @@ VillageBuilder::~VillageBuilder()
 
 Resources VillageBuilder::getResourcesEfficiency(const std::shared_ptr<Village>& currentVillage)
 {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
     double woodEff =
       getUpgradeEfficiency(currentVillage, TW_ENUMS::BuildingNames::WOOD, currentVillage->getBuildingLevel(TW_ENUMS::BuildingNames::WOOD) + 1);
     double stoneEff =

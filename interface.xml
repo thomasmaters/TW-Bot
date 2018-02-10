@@ -10,7 +10,7 @@
     <stone_factor>1.275</stone_factor>
     <iron_factor>1.26</iron_factor>
     <pop_factor>1.17</pop_factor>
-    <build_time>562.5</build_time>
+    <build_time>450</build_time>
     <build_time_factor>1.2</build_time_factor>
   </main>
   <barracks>
@@ -24,7 +24,7 @@
     <stone_factor>1.28</stone_factor>
     <iron_factor>1.26</iron_factor>
     <pop_factor>1.17</pop_factor>
-    <build_time>1125</build_time>
+    <build_time>900</build_time>
     <build_time_factor>1.2</build_time_factor>
   </barracks>
   <stable>
@@ -38,7 +38,7 @@
     <stone_factor>1.28</stone_factor>
     <iron_factor>1.26</iron_factor>
     <pop_factor>1.17</pop_factor>
-    <build_time>3750</build_time>
+    <build_time>3000</build_time>
     <build_time_factor>1.2</build_time_factor>
   </stable>
   <garage>
@@ -52,7 +52,7 @@
     <stone_factor>1.28</stone_factor>
     <iron_factor>1.26</iron_factor>
     <pop_factor>1.17</pop_factor>
-    <build_time>3750</build_time>
+    <build_time>3000</build_time>
     <build_time_factor>1.2</build_time_factor>
   </garage>
   <watchtower>
@@ -66,7 +66,7 @@
     <stone_factor>1.17</stone_factor>
     <iron_factor>1.18</iron_factor>
     <pop_factor>1.18</pop_factor>
-    <build_time>8250</build_time>
+    <build_time>6600</build_time>
     <build_time_factor>1.2</build_time_factor>
   </watchtower>
   <snob>
@@ -80,7 +80,7 @@
     <stone_factor>2</stone_factor>
     <iron_factor>2</iron_factor>
     <pop_factor>1.17</pop_factor>
-    <build_time>366750</build_time>
+    <build_time>293400</build_time>
     <build_time_factor>1.2</build_time_factor>
   </snob>
   <smith>
@@ -94,7 +94,7 @@
     <stone_factor>1.275</stone_factor>
     <iron_factor>1.26</iron_factor>
     <pop_factor>1.17</pop_factor>
-    <build_time>3750</build_time>
+    <build_time>3000</build_time>
     <build_time_factor>1.2</build_time_factor>
   </smith>
   <place>
@@ -108,7 +108,7 @@
     <stone_factor>1.275</stone_factor>
     <iron_factor>1.26</iron_factor>
     <pop_factor>1.17</pop_factor>
-    <build_time>6787.5</build_time>
+    <build_time>5430</build_time>
     <build_time_factor>1.2</build_time_factor>
   </place>
   <statue>
@@ -122,7 +122,7 @@
     <stone_factor>1.275</stone_factor>
     <iron_factor>1.26</iron_factor>
     <pop_factor>1.17</pop_factor>
-    <build_time>937.5</build_time>
+    <build_time>750</build_time>
     <build_time_factor>1.2</build_time_factor>
   </statue>
   <market>
@@ -136,7 +136,7 @@
     <stone_factor>1.275</stone_factor>
     <iron_factor>1.26</iron_factor>
     <pop_factor>1.17</pop_factor>
-    <build_time>1687.5</build_time>
+    <build_time>1350</build_time>
     <build_time_factor>1.2</build_time_factor>
   </market>
   <wood>
@@ -150,7 +150,7 @@
     <stone_factor>1.275</stone_factor>
     <iron_factor>1.245</iron_factor>
     <pop_factor>1.155</pop_factor>
-    <build_time>562.5</build_time>
+    <build_time>450</build_time>
     <build_time_factor>1.2</build_time_factor>
   </wood>
   <stone>
@@ -164,7 +164,7 @@
     <stone_factor>1.265</stone_factor>
     <iron_factor>1.24</iron_factor>
     <pop_factor>1.14</pop_factor>
-    <build_time>562.5</build_time>
+    <build_time>450</build_time>
     <build_time_factor>1.2</build_time_factor>
   </stone>
   <iron>
@@ -178,7 +178,7 @@
     <stone_factor>1.275</stone_factor>
     <iron_factor>1.24</iron_factor>
     <pop_factor>1.17</pop_factor>
-    <build_time>675</build_time>
+    <build_time>540</build_time>
     <build_time_factor>1.2</build_time_factor>
   </iron>
   <farm>
@@ -192,7 +192,7 @@
     <stone_factor>1.32</stone_factor>
     <iron_factor>1.29</iron_factor>
     <pop_factor>1</pop_factor>
-    <build_time>750</build_time>
+    <build_time>600</build_time>
     <build_time_factor>1.2</build_time_factor>
   </farm>
   <storage>
@@ -206,7 +206,7 @@
     <stone_factor>1.27</stone_factor>
     <iron_factor>1.245</iron_factor>
     <pop_factor>1.15</pop_factor>
-    <build_time>637.5</build_time>
+    <build_time>510</build_time>
     <build_time_factor>1.2</build_time_factor>
   </storage>
   <hide>
@@ -220,7 +220,7 @@
     <stone_factor>1.25</stone_factor>
     <iron_factor>1.25</iron_factor>
     <pop_factor>1.17</pop_factor>
-    <build_time>1125</build_time>
+    <build_time>900</build_time>
     <build_time_factor>1.2</build_time_factor>
   </hide>
   <wall>
@@ -234,7 +234,7 @@
     <stone_factor>1.275</stone_factor>
     <iron_factor>1.26</iron_factor>
     <pop_factor>1.17</pop_factor>
-    <build_time>2250</build_time>
+    <build_time>1800</build_time>
     <build_time_factor>1.2</build_time_factor>
   </wall>
 </config>

@@ -56,7 +56,6 @@ bool TWT_ReadVillageData::executeBotTask() const
     catch (const std::exception& e)
     {
         BotManager::getInstance().addEvent(std::shared_ptr<TW_Event>(new TWE_TaskFailed(shared_from_this(), e)));
-        std::cerr << __PRETTY_FUNCTION__ << e.what() << std::endl;
         return false;
     }
 

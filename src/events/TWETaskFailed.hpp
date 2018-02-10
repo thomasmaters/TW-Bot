@@ -17,7 +17,7 @@ class TWE_TaskFailed : public TW_Event
 public:
     explicit TWE_TaskFailed(std::shared_ptr<const TW_Task> task, const std::exception& reason) : TW_Event(), task(task), reason(reason)
     {
-        std::cout << "Task shared pointer is owned by: " << task.use_count() << " objects." << std::endl;
+        std::cout << "Task shared pointer is owned by: " << task.use_count() << " objects and crashed because of: " << reason.what() << std::endl;
     }
 
     virtual ~TWE_TaskFailed()

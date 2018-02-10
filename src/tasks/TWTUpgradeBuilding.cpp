@@ -33,7 +33,7 @@ bool TWT_UpgradeBuilding::executeBotTask() const
         Keyboard::holdKey(VK_CONTROL);
         Keyboard::pressCharKey('l');
         Keyboard::releaseKey(VK_CONTROL);
-        Keyboard::typeString("https://nl57.tribalwars.nl/game.php?village=" + std::to_string(village->getVillageId()) +
+        Keyboard::typeString("https://" + village->getWorld() + ".tribalwars.nl/game.php?village=" + std::to_string(village->getVillageId()) +
                              "&screen=main&action=upgrade_building&id=" + TW_ENUMS::enumToBuildingName(building) + "&type=main&h=" + csrf);
         Keyboard::pressKey(VK_RETURN);
 
@@ -48,7 +48,7 @@ bool TWT_UpgradeBuilding::executeBotTask() const
     }
     catch (const std::exception& e)
     {
-        std::cerr << __PRETTY_FUNCTION__ << e.what() << std::endl;
+        BotManager::getInstance().addEvent(std::shared_ptr<TW_Event>(new TWE_TaskFailed(shared_from_this(), e)));
         return false;
     }
     return true;

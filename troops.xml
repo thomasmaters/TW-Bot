@@ -1,6 +1,6 @@
 <config>
   <spear>
-    <build_time>637.5</build_time>
+    <build_time>510</build_time>
     <pop>1</pop>
     <speed>18.000000000504</speed>
     <attack>10</attack>
@@ -10,7 +10,7 @@
     <carry>25</carry>
   </spear>
   <sword>
-    <build_time>937.5</build_time>
+    <build_time>750</build_time>
     <pop>1</pop>
     <speed>21.999999999296</speed>
     <attack>25</attack>
@@ -20,7 +20,7 @@
     <carry>15</carry>
   </sword>
   <axe>
-    <build_time>825</build_time>
+    <build_time>660</build_time>
     <pop>1</pop>
     <speed>18.000000000504</speed>
     <attack>40</attack>
@@ -30,7 +30,7 @@
     <carry>10</carry>
   </axe>
   <archer>
-    <build_time>1125</build_time>
+    <build_time>900</build_time>
     <pop>1</pop>
     <speed>18.000000000504</speed>
     <attack>15</attack>
@@ -40,7 +40,7 @@
     <carry>10</carry>
   </archer>
   <spy>
-    <build_time>562.5</build_time>
+    <build_time>450</build_time>
     <pop>2</pop>
     <speed>8.99999999928</speed>
     <attack>0</attack>
@@ -50,7 +50,7 @@
     <carry>0</carry>
   </spy>
   <light>
-    <build_time>1125</build_time>
+    <build_time>900</build_time>
     <pop>4</pop>
     <speed>9.999999998</speed>
     <attack>130</attack>
@@ -60,7 +60,7 @@
     <carry>80</carry>
   </light>
   <marcher>
-    <build_time>1687.5</build_time>
+    <build_time>1350</build_time>
     <pop>5</pop>
     <speed>9.999999998</speed>
     <attack>120</attack>
@@ -70,7 +70,7 @@
     <carry>50</carry>
   </marcher>
   <heavy>
-    <build_time>2250</build_time>
+    <build_time>1800</build_time>
     <pop>6</pop>
     <speed>11.0000000011</speed>
     <attack>150</attack>
@@ -80,7 +80,7 @@
     <carry>50</carry>
   </heavy>
   <ram>
-    <build_time>3000</build_time>
+    <build_time>2400</build_time>
     <pop>5</pop>
     <speed>29.9999999976</speed>
     <attack>2</attack>
@@ -90,7 +90,7 @@
     <carry>0</carry>
   </ram>
   <catapult>
-    <build_time>4500</build_time>
+    <build_time>3600</build_time>
     <pop>8</pop>
     <speed>29.9999999976</speed>
     <attack>100</attack>
@@ -100,7 +100,7 @@
     <carry>0</carry>
   </catapult>
   <knight>
-    <build_time>13500</build_time>
+    <build_time>10800</build_time>
     <pop>10</pop>
     <speed>9.999999998</speed>
     <attack>150</attack>
@@ -110,7 +110,7 @@
     <carry>100</carry>
   </knight>
   <snob>
-    <build_time>11250</build_time>
+    <build_time>9000</build_time>
     <pop>100</pop>
     <speed>34.9999999993</speed>
     <attack>30</attack>

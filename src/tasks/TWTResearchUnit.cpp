@@ -34,7 +34,7 @@ bool TWT_ResearchUnit::executeBotTask() const
     }
     catch (const std::exception& e)
     {
-        std::cerr << __PRETTY_FUNCTION__ << e.what() << std::endl;
+        BotManager::getInstance().addEvent(std::shared_ptr<TW_Event>(new TWE_TaskFailed(shared_from_this(), e)));
         return false;
     }
     return true;
@@ -42,10 +42,10 @@ bool TWT_ResearchUnit::executeBotTask() const
 
 bool TWT_ResearchUnit::postBotTask() const
 {
-    if(BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoNavigation(TW_ENUMS::NavigationNames::OVERVIEW))))
+    if (BotManager::getInstance().executeSubTask(std::shared_ptr<TW_Task>(new TWT_GotoNavigation(TW_ENUMS::NavigationNames::OVERVIEW))))
     {
-	BotManager::getInstance().addEvent(std::shared_ptr<TW_Event>(new TWE_UnitResearchStarted(unit, village->getVillageId())));
-	return true;
+        BotManager::getInstance().addEvent(std::shared_ptr<TW_Event>(new TWE_UnitResearchStarted(unit, village->getVillageId())));
+        return true;
     }
     return false;
 }

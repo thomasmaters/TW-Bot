@@ -2,12 +2,13 @@
  * VillageBuilder.hpp
  *
  *  Created on: 30 aug. 2017
- *      Author: Thomas
+ *      Author: Thomas Maters
  */
 
 #ifndef VILLAGEBUILDER_HPP_
 #define VILLAGEBUILDER_HPP_
 
+#include "Resources.hpp"
 #include "TW_Enums.hpp"
 #include "Village.hpp"
 

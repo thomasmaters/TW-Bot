@@ -32,6 +32,16 @@ struct Resources
         iron -= rhs.iron;
         return *this;
     }
+
+    bool operator>(const uint16_t other) const
+    {
+        return wood > other && stone > other && iron > other;
+    }
+
+    bool operator<(const uint16_t other) const
+    {
+        return wood < other && stone < other && iron < other;
+    }
 };
 
 typedef Resources ResourceBonus;

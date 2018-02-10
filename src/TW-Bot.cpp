@@ -15,6 +15,10 @@
 // TODO Alle dorpen ophalen dmv : https://nl57.tribalwars.nl/map/village.txt
 // https://help.tribalwars.nl/wiki/Wereld_Data
 
+// /interface.php?func=get_config
+// /interface.php?func=get_building_info
+// /interface.php?func=get_unit_info
+
 
 int WINAPI WinMain(HINSTANCE hInst, HINSTANCE P, LPSTR CMD, int nShowCmd)
 {
@@ -29,7 +33,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE P, LPSTR CMD, int nShowCmd)
         //            std::cout << a << " -> " << std::hash<std::string>{}(a) << std::endl;
         //        }
         BotManager::getInstance().startBotManager();
-        std::cout << GameManager::getInstance().getTroopBuildTime(TW_ENUMS::TroopNames::SPEAR, 2) << std::endl;
+        //        std::cout << GameManager::getInstance().getTroopBuildTime(TW_ENUMS::TroopNames::SPEAR, 2) << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(3));
         //        BotManager::getInstance().scheduleEvent(180000, std::shared_ptr<TW_Event>(new TWE_SwitchedToVillage()));
         GameManager::getInstance().createNewVillage();

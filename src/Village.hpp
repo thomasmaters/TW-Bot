@@ -91,6 +91,11 @@ public:
         return csrf;
     }
 
+    const std::string& getWorld() const
+    {
+        return world;
+    }
+
     bool isCurrentlyBuilding() const
     {
         return currentlyBuilding;
@@ -140,6 +145,7 @@ private:
 
     uint32_t villageID;
     std::string csrf;  ///< I have no idea where this stands for, but it's a kind of cookie. When something goes wrong this 'cookie' is reset.
+    std::string world;
     std::unordered_map<TW_ENUMS::BuildingNames, uint8_t, std::hash<int>> buildings;       ///< Map with buildings and there levels
     std::unordered_map<TW_ENUMS::TroopNames, UnitResearch, std::hash<int>> unitResearch;  ///< Map with units that need to be researched.
 };

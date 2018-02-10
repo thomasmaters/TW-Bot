@@ -37,6 +37,11 @@ public:
 
     // Functions for adding and handling tasks.
     void addTask(const std::shared_ptr<TW_Task>& aTask);
+    /**
+     * Schedules a task to be added to the queue.
+     * @param aDelay Delay in miliseconds.
+     * @param aTask
+     */
     void scheduleTask(const uint32_t aDelay, const std::shared_ptr<TW_Task>& aTask);
 
     bool executeSubTask(const std::shared_ptr<TW_Task>& aEvent) const;

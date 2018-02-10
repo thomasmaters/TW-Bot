@@ -1,5 +1,6 @@
 #include "TWTGotoNavigation.hpp"
 
+#include "../BotManager.hpp"
 #include "../GameManager.hpp"
 #include "../Mouse.hpp"
 
@@ -18,7 +19,7 @@ bool TWT_GotoNavigation::executeBotTask() const
     }
     catch (std::exception& e)
     {
-        std::cerr << __PRETTY_FUNCTION__ << e.what() << std::endl;
+        BotManager::getInstance().addEvent(std::shared_ptr<TW_Event>(new TWE_TaskFailed(shared_from_this(), e)));
         return false;
     }
     return true;
