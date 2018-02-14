@@ -7,7 +7,7 @@
 	<heavy>0</heavy>
 	<ram>0</ram>
 	<catapult>0</catapult>
-	<knight>0</knight>
+	<knight>recuit_knight.png</knight>
 	<snob>0</snob>
 </recruit>
 <research>
