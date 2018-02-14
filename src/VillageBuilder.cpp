@@ -30,7 +30,6 @@ void VillageBuilder::developVillage(const std::shared_ptr<Village>& currentVilla
     {
         for (tinyxml2::XMLElement* child = villageUpgradePath.FirstChildElement(); child != NULL; child = child->NextSiblingElement())
         {
-            std::cout << std::string(child->Name()) << std::endl;
             if (std::string(child->Name()) == "build" && !currentVillage->isCurrentlyBuilding())
             {
                 uint8_t level                    = std::stoi(child->GetText());
@@ -59,7 +58,6 @@ void VillageBuilder::developVillage(const std::shared_ptr<Village>& currentVilla
 
                 if (canUpgradeResourceBuilding(currentVillage, maxEfficienty))
                 {
-                    std::cout << "Can upgrade" << std::endl;
                     TW_ENUMS::BuildingNames bestResourceToUpgrade = upgradeNextResource(currentVillage, maxEfficienty);
                     startVillageBuild(currentVillage, bestResourceToUpgrade);
                     break;
@@ -76,9 +74,12 @@ void VillageBuilder::developVillage(const std::shared_ptr<Village>& currentVilla
 void VillageBuilder::startVillageBuild(const std::shared_ptr<Village>& currentVillage, const TW_ENUMS::BuildingNames& building)
 {
     // Calculate cost.
-    Resources buildingCost = GameManager::getInstance().getBuildingCost(building, currentVillage->getBuildingLevel(building) + 1);
-    std::cout << "Building cost: " << buildingCost.toString() << std::endl;
-    uint32_t populationCost = GameManager::getInstance().getPopulationCost(building, currentVillage->getBuildingLevel(building) + 1);
+    uint8_t level           = currentVillage->getBuildingLevel(building) + 1;
+    Resources buildingCost  = GameManager::getInstance().getBuildingCost(building, level);
+    uint32_t populationCost = GameManager::getInstance().getPopulationCost(building, level);
+
+    std::cout << "Upgrading: " << TW_ENUMS::enumToBuildingName(building) << " cost: " << buildingCost.toString()
+              << " to level: " << std::to_string(level) << std::endl;
 
     // If we don't have enough population to start a upgrade, consider upgrading the farm.
     if (!currentVillage->hasEnoughPopulation(populationCost))
@@ -159,7 +160,6 @@ VillageBuilder::~VillageBuilder()
 
 Resources VillageBuilder::getResourcesEfficiency(const std::shared_ptr<Village>& currentVillage)
 {
-    std::cout << __PRETTY_FUNCTION__ << std::endl;
     double woodEff =
       getUpgradeEfficiency(currentVillage, TW_ENUMS::BuildingNames::WOOD, currentVillage->getBuildingLevel(TW_ENUMS::BuildingNames::WOOD) + 1);
     double stoneEff =

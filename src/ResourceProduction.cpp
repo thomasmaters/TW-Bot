@@ -2,12 +2,13 @@
  * ResourceProduction.cpp
  *
  *  Created on: 3 aug. 2017
- *      Author: Thomas
+ *      Author: Thomas Maters
  */
 
 #include "ResourceProduction.hpp"
 
 #include <chrono>
+#include <iostream>
 
 ResourceProduction::ResourceProduction()
   : population(0), maxPopulation(0), maxStorage(0), resources(), production(), bonus(), last_res_tick(std::time_t(0))
@@ -18,6 +19,7 @@ ResourceProduction::ResourceProduction()
 bool ResourceProduction::hasEnoughResources(const Resources& cost) const
 {
     Resources currentResources = getCurrentResources();
+    std::cout << __PRETTY_FUNCTION__ << ": current resources: " << currentResources.toString() << std::endl;
     return cost.wood <= currentResources.wood && cost.stone <= currentResources.stone && cost.iron <= currentResources.iron;
 }
 
@@ -64,6 +66,8 @@ Resources ResourceProduction::getCurrentResources() const
 {
     std::chrono::system_clock::duration timeDifference = std::chrono::system_clock::now() - std::chrono::system_clock::from_time_t(last_res_tick);
     uint64_t timeSinceLastUpdate                       = std::chrono::duration_cast<std::chrono::seconds>(timeDifference).count();
+
+    std::cout << "Time difference: " << timeSinceLastUpdate << std::endl;
 
     return Resources(resources.wood + production.wood * timeSinceLastUpdate, resources.stone + production.stone * timeSinceLastUpdate,
                      resources.iron + production.iron * timeSinceLastUpdate);

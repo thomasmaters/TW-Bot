@@ -2,7 +2,7 @@
  * ImageRecognition.cpp
  *
  *  Created on: 12 jan. 2017
- *      Author: Thomas
+ *      Author: Thomas Maters
  */
 
 #include "ImageRecognition.hpp"
@@ -18,34 +18,26 @@ ImageRecognition::ImageRecognition()
 cv::Rect ImageRecognition::matchTemplate(const std::string& aImageLocation, const std::string& aTemplateLocation, const int aMatchMethode,
                                          const double threshold) const
 {
-    try
+    Screen::takeScreenShot();
+
+    cv::Mat sourceImage   = loadImage(aImageLocation);
+    cv::Mat templateImage = loadImage(aTemplateLocation);
+
+    // Make object to save result in.
+    int result_cols = sourceImage.cols - templateImage.cols + 1;
+    int result_rows = sourceImage.rows - templateImage.rows + 1;
+    cv::Mat result  = cv::Mat(result_rows, result_cols, CV_32FC1);
+
+    // Match template and normalize the result.
+    cv::matchTemplate(sourceImage, templateImage, result, aMatchMethode);
+
+    cv::Point a;
+    if (getBestLocation(a, result, aMatchMethode, threshold))
     {
-        Screen::takeScreenShot();
-
-        cv::Mat sourceImage   = loadImage(aImageLocation);
-        cv::Mat templateImage = loadImage(aTemplateLocation);
-
-        // Make object to save result in.
-        int result_cols = sourceImage.cols - templateImage.cols + 1;
-        int result_rows = sourceImage.rows - templateImage.rows + 1;
-        cv::Mat result  = cv::Mat(result_rows, result_cols, CV_32FC1);
-
-        // Match template and normalize the result.
-        cv::matchTemplate(sourceImage, templateImage, result, aMatchMethode);
-
-        cv::Point a;
-        if (getBestLocation(a, result, aMatchMethode, threshold))
-        {
-            throw std::runtime_error("Didn't found template in image.");
-        }
-
-        return cv::Rect(a.x, a.y, templateImage.cols, templateImage.rows);
+        throw std::runtime_error("Didn't found template in image.");
     }
-    catch (const std::exception& e)
-    {
-        throw e;
-    }
-    return { 0, 0, 0, 0 };
+
+    return cv::Rect(a.x, a.y, templateImage.cols, templateImage.rows);
 }
 
 std::vector<cv::Rect> ImageRecognition::matchTemplates(const std::string& aImageLocation, const std::string& aTemplateLocation,

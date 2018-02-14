@@ -61,6 +61,16 @@ void Mouse::moveMouse(const cv::Rect& moveTo)
     moveMouse((RECT){ moveTo.x, moveTo.y, moveTo.x + moveTo.width + 1, moveTo.y + moveTo.height + 1 });
 }
 
+void Mouse::moveMouse(uint16_t x, uint16_t y)
+{
+    moveMouse((RECT){ x, y, x + 1, y + 1 });
+}
+
+void Mouse::moveMouse(uint16_t x, uint16_t y, uint16_t width, uint16_t height)
+{
+    moveMouse((RECT){ x, y, x + width, y + height });
+}
+
 void Mouse::setCursorPosition(POINT point)
 {
     int xPos = (double)point.x / GetSystemMetrics(SM_CXSCREEN) * 65535;

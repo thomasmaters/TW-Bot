@@ -45,7 +45,6 @@ cv::Rect GameManager::getBuildingPositionOnScreen(const enum TW_ENUMS::BuildingN
 std::vector<cv::Rect> GameManager::getTemplatePositionsOnScreen(const std::string& aParent, const std::string& aChild, uint8_t amountOfResults)
 {
     tinyxml2::XMLElement* xmlElement = templateData.FirstChildElement(aParent.c_str())->FirstChildElement(aChild.c_str());
-
     return imageParser.matchTemplates("screenshot.bmp", xmlElement->GetText(), amountOfResults, 5, 0.75);
 }
 
@@ -53,7 +52,6 @@ std::vector<cv::Rect> GameManager::getTemplatePositionsOnScreen(const std::strin
 cv::Rect GameManager::getTemplatePositionOnScreen(const std::string& aParent, const std::string& aChild)
 {
     tinyxml2::XMLElement* xmlElement = templateData.FirstChildElement(aParent.c_str())->FirstChildElement(aChild.c_str());
-
     return getTemplatePositionOnScreen(xmlElement->GetText());
 }
 

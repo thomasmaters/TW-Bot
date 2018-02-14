@@ -50,4 +50,6 @@
 	<B>templates/b.png</B>
 	<C>templates/c.png</C>
 </farm_assistant>
-<captcha>templates/captcha.png</captcha>
+<captcha>
+	<A>templates/captcha.png</A>
+</captcha>

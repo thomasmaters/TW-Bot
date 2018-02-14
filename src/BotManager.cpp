@@ -2,10 +2,11 @@
  * BotManager.cpp
  *
  *  Created on: 27 nov. 2016
- *      Author: Thomas
+ *      Author: Thomas Maters
  */
 
 #include "BotManager.hpp"
+#include "tasks/TWTCompleteCaptcha.hpp"
 
 #include <iostream>
 
@@ -19,15 +20,18 @@ void BotManager::startBotManager()
 {
     eventQueue.setCallbackFunction([](std::shared_ptr<TW_Event> b) { BotManager::getInstance().handleEvent(b); });
     taskQueue.setCallbackFunction([](std::shared_ptr<TW_Task> b) { BotManager::getInstance().handleTask(b); });
+
+    // Default task for checking if a captch appeared on the users screen.
+    scheduleTask(CAPTCHA_CHECK_INTERVAL, std::shared_ptr<TW_Task>(new TWTCompleteCaptcha));
 }
 
 void BotManager::addEvent(const std::shared_ptr<TW_Event>& aEvent)
 {
     std::cerr << "Event added: " << typeid(*aEvent).name() << std::endl;
-    if(typeid(*aEvent) == typeid(TWE_TaskFailed))
+    if (typeid(*aEvent) == typeid(TWE_TaskFailed))
     {
-	handleEvent(aEvent);
-	return;
+        handleEvent(aEvent);
+        return;
     }
     eventQueue.addToQueue(aEvent);
 }
@@ -84,8 +88,8 @@ void BotManager::handleEvent(const std::shared_ptr<TW_Event>& aEvent) const
     }
     if (typeid(*aEvent) == typeid(TWE_TaskFailed))
     {
-	TWE_TaskFailed& a = dynamic_cast<TWE_TaskFailed&>(*aEvent);
-	TWE_TaskFailedHandler(a);
+        TWE_TaskFailed& a = dynamic_cast<TWE_TaskFailed&>(*aEvent);
+        TWE_TaskFailedHandler(a);
     }
 }
 
@@ -104,12 +108,12 @@ void BotManager::scheduleTask(const uint32_t aDelay, const std::shared_ptr<TW_Ta
 bool BotManager::handleTask(const std::shared_ptr<TW_Task>& aTask) const
 {
     std::cerr << "Handling task: " << typeid(*aTask).name() << std::endl;
-    if(!aTask->preBotTask())
-	return false;
-    if(!aTask->executeBotTask())
-	return false;
-    if(!aTask->postBotTask())
-	return false;
+    if (!aTask->preBotTask())
+        return false;
+    if (!aTask->executeBotTask())
+        return false;
+    if (!aTask->postBotTask())
+        return false;
     std::this_thread::sleep_for(std::chrono::milliseconds(150));
     return true;
 }

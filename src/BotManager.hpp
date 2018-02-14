@@ -31,12 +31,25 @@ public:
 
     void startBotManager();
 
-    // Functions for adding and handling events.
+    /**
+     * Adds an event to the back of the queue.
+     * @param aEvent
+     */
     void addEvent(const std::shared_ptr<TW_Event>& aEvent);
+
+    /**
+     * Schedules a event to be added to the queue.
+     * @param aDelay in miliseconds.
+     * @param aEvent
+     */
     void scheduleEvent(const uint32_t aDelay, const std::shared_ptr<TW_Event>& aEvent);
 
-    // Functions for adding and handling tasks.
+    /**
+     * Adds a task to the back of the queue.
+     * @param aTask
+     */
     void addTask(const std::shared_ptr<TW_Task>& aTask);
+
     /**
      * Schedules a task to be added to the queue.
      * @param aDelay Delay in miliseconds.
@@ -44,12 +57,27 @@ public:
      */
     void scheduleTask(const uint32_t aDelay, const std::shared_ptr<TW_Task>& aTask);
 
+    /**
+     * Imiditly executes a task.
+     * @param aEvent
+     * @return True if executed correctly.
+     */
     bool executeSubTask(const std::shared_ptr<TW_Task>& aEvent) const;
 
     virtual ~BotManager();
 
 protected:
+    /**
+     * Starts the handling of an event.
+     * @param aEvent
+     */
     void handleEvent(const std::shared_ptr<TW_Event>& aEvent) const;
+
+    /**
+     * Starts the execution of a task.
+     * @param aTask
+     * @return True if executed correctly.
+     */
     bool handleTask(const std::shared_ptr<TW_Task>& aTask) const;
 
 private:

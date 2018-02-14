@@ -234,7 +234,7 @@ void Village::parseVillageClipboardData(nlohmann::json villageData)
         maxStorage    = villageData["village"]["storage_max"];
         resources     = Resources(villageData["village"]["wood_float"], villageData["village"]["stone_float"], villageData["village"]["iron_float"]);
         production    = ResourceProd(villageData["village"]["wood_prod"], villageData["village"]["stone_prod"], villageData["village"]["iron_prod"]);
-        last_res_tick = std::time_t(villageData["village"]["last_res_tick"]);
+        last_res_tick = std::time_t(villageData["village"]["last_res_tick"].get<uint64_t>() / 1000);
 
         // Does or village has a resource bonus?
         if (villageData["village"].find("bonus") != villageData["village"].end() && !villageData["village"]["bonus"].empty())
