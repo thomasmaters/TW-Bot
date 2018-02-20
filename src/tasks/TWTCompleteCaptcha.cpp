@@ -20,6 +20,7 @@ bool TWTCompleteCaptcha::executeBotTask() const
     {
         BotManager::getInstance().scheduleTask(CAPTCHA_CHECK_INTERVAL, std::shared_ptr<TW_Task>(new TWTCompleteCaptcha()));
 
+        // If this function throws, no captcha has been found!
         cv::Rect templatePos = GameManager::getInstance().getTemplatePositionOnScreen("captcha", "A");
 
         Mouse::moveMouse(templatePos.x + CAPTCHA_BUTTON_OFFSET_X, templatePos.y + CAPTCHA_BUTTON_OFFSET_Y, CAPTCHA_BUTTON_SIZE_X,

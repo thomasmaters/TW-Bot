@@ -2,7 +2,7 @@
  * GameManager.cpp
  *
  *  Created on: 15 jan. 2017
- *      Author: Thomas
+ *      Author: Thomas Maters
  */
 
 #include "GameManager.hpp"
@@ -24,7 +24,7 @@ GameManager& GameManager::getInstance()
 
 cv::Rect GameManager::getBuildingPositionOnScreen(const enum TW_ENUMS::BuildingNames& aBuildingName)
 {
-    std::cout << __PRETTY_FUNCTION__ << std::endl;
+    std::cout << __PRETTY_FUNCTION__ << " " << TW_ENUMS::enumToBuildingName(aBuildingName) << std::endl;
     std::string buildingString     = TW_ENUMS::enumToBuildingName(aBuildingName);
     tinyxml2::XMLElement* building = templateData.FirstChildElement("buildings")->FirstChildElement(buildingString.c_str());
 
@@ -34,7 +34,8 @@ cv::Rect GameManager::getBuildingPositionOnScreen(const enum TW_ENUMS::BuildingN
     {
         if (level >= std::atoi(child->Attribute("minLevel")) && level <= std::atoi(child->Attribute("maxLevel")))
         {
-            return getTemplatePositionOnScreen(child->GetText());
+            std::cout << "Finding building template: " << child->GetText() << std::endl;
+            return getTemplatePositionOnScreen(child->GetText(), 0.75);
         }
     }
 
@@ -55,9 +56,9 @@ cv::Rect GameManager::getTemplatePositionOnScreen(const std::string& aParent, co
     return getTemplatePositionOnScreen(xmlElement->GetText());
 }
 
-cv::Rect GameManager::getTemplatePositionOnScreen(const std::string& aTemplate)
+cv::Rect GameManager::getTemplatePositionOnScreen(const std::string& aTemplate, double matchingFactor)
 {
-    return imageParser.matchTemplate("screenshot.bmp", aTemplate, 5, 0.8);
+    return imageParser.matchTemplate("screenshot.bmp", aTemplate, 5, matchingFactor);
 }
 
 /************************************
@@ -119,6 +120,10 @@ double GameManager::getTroopBuildTime(const TW_ENUMS::TroopNames& troop, uint8_t
 
     std::string build_time = buildingXMLNode->FirstChildElement("build_time")->GetText();
     double buildTime       = std::atof(build_time.c_str());
+    if (troop == TW_ENUMS::TroopNames::KNIGHT)
+    {
+        return buildTime;
+    }
 
     return (double)2 / 3 * buildTime * std::pow(1.06, -recruitmentBuildingLevel);
 }

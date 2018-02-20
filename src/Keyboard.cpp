@@ -149,5 +149,4 @@ bool Keyboard::isKeyPressed(const uint8_t key)
 
 Keyboard::~Keyboard()
 {
-    // TODO Auto-generated destructor stub
 }

@@ -10,10 +10,8 @@
 
 FarmManager::FarmManager()
 {
-    // TODO Auto-generated constructor stub
 }
 
 FarmManager::~FarmManager()
 {
-    // TODO Auto-generated destructor stub
 }

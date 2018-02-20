@@ -8,11 +8,12 @@
 #ifndef TWTGOTONAVIGATION_HPP_
 #define TWTGOTONAVIGATION_HPP_
 
+#include "TWSubTask.hpp"
 #include "TWTask.hpp"
 
 #include "../TW_Enums.hpp"
 
-class TWT_GotoNavigation : public TW_Task
+class TWT_GotoNavigation : public TW_Task, public TW_SubTask
 {
 public:
     explicit TWT_GotoNavigation(const enum TW_ENUMS::NavigationNames& gotoLocation);

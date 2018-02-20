@@ -87,5 +87,4 @@ POINT Mouse::getCursorPosition()
 
 Mouse::~Mouse()
 {
-    // TODO Auto-generated destructor stub
 }

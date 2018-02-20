@@ -2,7 +2,7 @@
  * TWTFarmAssistantSetTemplate.hpp
  *
  *  Created on: 26 aug. 2017
- *      Author: Thomas
+ *      Author: Thomas Maters
  */
 
 #ifndef TWTFARMASSISTANTSETTEMPLATE_HPP_
@@ -17,7 +17,7 @@ public:
 
     bool executeBotTask() const
     {
-	return true;
+        return true;
     }
 
     virtual ~TWT_FarmAssistantSetTemplate();

@@ -232,7 +232,7 @@ void Village::parseVillageClipboardData(nlohmann::json villageData)
         population    = villageData["village"]["pop"];
         maxPopulation = villageData["village"]["pop_max"];
         maxStorage    = villageData["village"]["storage_max"];
-        resources     = Resources(villageData["village"]["wood_float"], villageData["village"]["stone_float"], villageData["village"]["iron_float"]);
+        resources     = Resources(villageData["village"]["wood"], villageData["village"]["stone"], villageData["village"]["iron"]);
         production    = ResourceProd(villageData["village"]["wood_prod"], villageData["village"]["stone_prod"], villageData["village"]["iron_prod"]);
         last_res_tick = std::time_t(villageData["village"]["last_res_tick"].get<uint64_t>() / 1000);
 

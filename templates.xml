@@ -7,7 +7,7 @@
 	<heavy>0</heavy>
 	<ram>0</ram>
 	<catapult>0</catapult>
-	<knight>recuit_knight.png</knight>
+	<knight>templates/recruit_knight.png</knight>
 	<snob>0</snob>
 </recruit>
 <research>
@@ -37,7 +37,9 @@
 		<overview minLevel="5" maxLevel="9">templates/smith_1.png</overview>
 		<overview minLevel="10" maxLevel="20">templates/smith_2.png</overview>
 	</smith>
-	<statue>0</statue>
+	<statue>
+		<overview minLevel="0" maxLevel="1">templates/statue.png</overview>
+	</statue>
 	<market>0</market>
 </buildings>
 <nav>

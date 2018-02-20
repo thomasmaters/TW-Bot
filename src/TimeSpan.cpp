@@ -48,6 +48,5 @@ bool TimeSpan::operator>( const TimeSpan& other) const
 }
 
 TimeSpan::~TimeSpan() {
-	// TODO Auto-generated destructor stub
 }
 

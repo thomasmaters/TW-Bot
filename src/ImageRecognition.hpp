@@ -56,7 +56,7 @@ public:
 
 private:
     /**
-     * Returns true if found result is greater then the threshold. Stores result in aLocation.
+     * Returns true if found result is smaller then the threshold. Stores result in aLocation.
      * @param aLocation Stores found location.
      * @param aImage
      * @param aMatchMethode

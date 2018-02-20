@@ -10,11 +10,11 @@
 
 #include "GameWorldSettings.hpp"
 #include "ImageRecognition.hpp"
+#include "Resources.hpp"
 #include "TW_Enums.hpp"
 #include "Village.hpp"
 #include "VillageBuilder.hpp"
 #include "util/Singleton.hpp"
-#include "Resources.hpp"
 
 #include <opencv2/core/types.hpp>
 #include "../lib/tinyxml2.h"
@@ -41,7 +41,7 @@ public:
      * @param aTemplate Filelocation of the template.
      * @return
      */
-    cv::Rect getTemplatePositionOnScreen(const std::string& aTemplate);
+    cv::Rect getTemplatePositionOnScreen(const std::string& aTemplate, double matchingFactor = 0.8);
 
     /**
      * Gets the position of a template on the screen.

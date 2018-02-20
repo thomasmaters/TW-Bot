@@ -9,10 +9,8 @@
 
 GameWorldSettings::GameWorldSettings() : gameSpeed(2), unitSpeed(1)
 {
-    // TODO Auto-generated constructor stub
 }
 
 GameWorldSettings::~GameWorldSettings()
 {
-    // TODO Auto-generated destructor stub
 }

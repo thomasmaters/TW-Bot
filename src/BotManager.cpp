@@ -6,9 +6,10 @@
  */
 
 #include "BotManager.hpp"
+#include "tasks/TWSubTask.hpp"
 #include "tasks/TWTCompleteCaptcha.hpp"
 
-#include <iostream>
+#include <iosfwd>
 
 BotManager& BotManager::getInstance()
 {
@@ -110,17 +111,28 @@ bool BotManager::handleTask(const std::shared_ptr<TW_Task>& aTask) const
     std::cerr << "Handling task: " << typeid(*aTask).name() << std::endl;
     if (!aTask->preBotTask())
         return false;
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
     if (!aTask->executeBotTask())
         return false;
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
     if (!aTask->postBotTask())
         return false;
     std::this_thread::sleep_for(std::chrono::milliseconds(150));
     return true;
 }
 
-bool BotManager::executeSubTask(const std::shared_ptr<TW_Task>& aEvent) const
+bool BotManager::executeSubTask(const std::shared_ptr<TW_Task>& aSubTask) const
 {
-    return handleTask(aEvent);
+    try
+    {
+        dynamic_cast<TW_SubTask&>(*aSubTask);
+        return handleTask(aSubTask);
+    }
+    catch (std::bad_cast& e)
+    {
+        std::cerr << __PRETTY_FUNCTION__ << ": " << e.what() << std::endl;
+    }
+    return false;
 }
 
 BotManager::~BotManager()

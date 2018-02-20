@@ -9,6 +9,7 @@
 
 #include "BotManager.hpp"
 #include "GameManager.hpp"
+#include "tasks/TWTRecruitUnit.hpp"
 #include "tasks/TWTResearchUnit.hpp"
 #include "tasks/TWTUpgradeBuilding.hpp"
 
@@ -62,6 +63,13 @@ void VillageBuilder::developVillage(const std::shared_ptr<Village>& currentVilla
                     startVillageBuild(currentVillage, bestResourceToUpgrade);
                     break;
                 }
+            }
+            else if (std::string(child->Name()) == "recruit")
+            {
+                TW_ENUMS::TroopNames troop = TW_ENUMS::stringToEnum<TW_ENUMS::TroopNames>(child->Attribute("unit"));
+
+                BotManager::getInstance().addTask(std::shared_ptr<TW_Task>(new TWT_RecruitUnit(currentVillage, troop)));
+                break;
             }
         }
     }

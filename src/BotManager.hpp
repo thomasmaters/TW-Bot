@@ -2,7 +2,7 @@
  * BotManager.hpp
  *
  *  Created on: 27 nov. 2016
- *      Author: Thomas
+ *      Author: Thomas Maters
  */
 
 #ifndef BOTMANAGER_HPP_

@@ -61,7 +61,7 @@ std::vector<cv::Rect> ImageRecognition::matchTemplates(const std::string& aImage
         for (uint8_t i = 0; i < amountOfMatches; ++i)
         {
             cv::Point matchLocation;
-            if (getBestLocation(matchLocation, result, aMatchMethode, threshold))
+            if (!getBestLocation(matchLocation, result, aMatchMethode, threshold))
             {
                 returnVector.push_back(cv::Rect(matchLocation.x, matchLocation.y, templateImage.cols, templateImage.rows));
             }
@@ -110,7 +110,7 @@ bool ImageRecognition::getBestLocation(cv::Point& aLocation, cv::Mat& aResult, c
     cv::floodFill(aResult, maxLoc, cv::Scalar(0), 0, cv::Scalar(.1), cv::Scalar(1.));
 
     aLocation = matchLoc;
-    // We did not find our template.
+    // Return true if we have a match that is lower then our wanted threshold.
     return (threshold != 0 && maxVal < threshold);
 }
 

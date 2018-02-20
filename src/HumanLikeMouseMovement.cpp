@@ -15,7 +15,6 @@
 
 HumanLikeMouseMovement::HumanLikeMouseMovement()
 {
-    // TODO Auto-generated constructor stub
     std::srand(std::time(0));
 }
 
@@ -50,5 +49,4 @@ double HumanLikeMouseMovement::distanceBetweenPoints2D(POINT start, POINT end)
 
 HumanLikeMouseMovement::~HumanLikeMouseMovement()
 {
-    // TODO Auto-generated destructor stub
 }

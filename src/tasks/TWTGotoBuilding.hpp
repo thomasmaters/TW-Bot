@@ -8,11 +8,12 @@
 #ifndef TWTGOTOBUILDING_HPP_
 #define TWTGOTOBUILDING_HPP_
 
+#include "TWSubTask.hpp"
 #include "TWTask.hpp"
 
 #include "../TW_Enums.hpp"
 
-class TWT_GotoBuilding : public TW_Task
+class TWT_GotoBuilding : public TW_Task, public TW_SubTask
 {
 public:
     explicit TWT_GotoBuilding(const enum TW_ENUMS::BuildingNames& gotoLocation);
